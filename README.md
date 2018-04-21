@@ -2,8 +2,8 @@
 simple Registration and login web services using JPA and mysql
 
 **Run Application:**
-1. Befor run the application make sour you have create database using with name "demo".
-2. go to application.properties file and change mysql username and password to your mysql database.
+1. Befor run the application make sure you have create database using with name "demo".
+2. Go to application.properties file and change mysql username and password to your mysql database.
 3. open terminal 
 4. go to application directory 
 5. fire command: ./gradlew bootrun
