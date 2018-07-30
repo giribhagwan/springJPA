@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<title>My jQuery JSON Web Page</title>
+
+<head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        JSONTest = function () {
+            var name = document.getElementById("name").value;
+            var userAddress = document.getElementById("userAddress").value;
+            var userName = document.getElementById("userName").value;
+            var userPassword = document.getElementById("userPassword").value;
+            var resultDiv = $("#resultDivContainer");
+            var temp = {
+                'fullName': name,
+                'address': userAddress,
+                'userName': userName,
+                'password': userPassword
+            };
+            $.ajax({
+                url: "http://localhost:8080/api/user/saveUser",
+                type: "POST",
+                data: JSON.stringify(temp),
+                dataType: "json",
+                contentType: 'application/json',
+                success: function (result) {
+                    switch (result) {
+                        case true:
+                            processResponse(result);
+                            break;
+                        default:
+                            var name = document.getElementById("name").value = "";
+                            var userAddress = document.getElementById("userAddress").value = "";
+                            var userName = document.getElementById("userName").value = "";
+                            var userPassword = document.getElementById("userPassword").value = "";
+                            resultDiv.html(result);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // alert(xhr.status);
+                    // alert(thrownError);
+                }
+            });
+        };
+
+    </script>
+</head>
+
+<body>
+
+    <h1 align="center">My jQuery JSON Web Page</h1>
+
+    <div id="resultDivContainer"></div>
+    <table align="center" cellspacing="10">
+        <tr>
+            <td>
+                <input id="name" placeholder="Enter full name" type="text">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="userAddress" placeholder="Enter Address" type="text">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="userName" placeholder="Enter user name" type="text">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="userPassword" placeholder="Enter password" type="text">
+            </td>
+        </tr>
+        <tr align="center">
+            <td>
+                <button type="button" onclick="JSONTest()">Send</button>
+            </td>
+        </tr>
+
+    </table>
+</body>
+
+</html>
